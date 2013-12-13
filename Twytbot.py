@@ -35,7 +35,7 @@ class twytbot:
     def sendtweet(self, user, response, message_id):
         text = "@"+user+" "+response
         log.info("Sending '"+text+"'")
-        #self.twitter.update_status(status=text, in_reply_to_status_id=message_id)
+        self.twitter.update_status(status=text, in_reply_to_status_id=message_id)
 
     def saveid(self, max_id):
         log.info("Saving max_ids")
