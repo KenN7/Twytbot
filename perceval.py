@@ -19,4 +19,4 @@ perceval.addpattern('sinécure',"Ouais, C'est pas faux !")
 perceval.addpattern('insipide',"C'est pas faux !")
 while True:
     perceval.run()
-    time.sleep(420)
+    time.sleep(300)
