@@ -1,5 +1,12 @@
 *.py[cod]
 
+# secret settings file
+settings.py
+
+#log and id files
+*.log
+lastid.txt
+
 # C extensions
 *.so
 
