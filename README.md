@@ -4,7 +4,9 @@ Twytbot
 Python auto-replying twitter bot
 -------
 Works with python2 and 3
+
 Simple bot used to answer to a tweet when detecting results on certain patterns on twitter searches.
+
 Just use the "perceval.py" example to understand how it works.
 
 This bot depends on Twython lib, therefore it must be installed.
