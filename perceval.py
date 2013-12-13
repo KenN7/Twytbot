@@ -4,8 +4,11 @@
 import Twytbot
 import time
 import settings
+import logging
 
-perceval = Twytbot.twytbot(C_KEY, C_SECRET, ACCESS_TOK, SECRET_TOK, NAME)
+logging.basicConfig(level=logging.INFO, filename='perceval.log')
+
+perceval = Twytbot.twytbot(settings.C_KEY, settings.C_SECRET, settings.ACCESS_TOK, settings.SECRET_TOK, settings.NAME)
 
 perceval.addpattern('dichotomie',"C'est pas faux !")
 while True:
