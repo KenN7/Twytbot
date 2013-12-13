@@ -15,6 +15,8 @@ logging.getLogger().addHandler(console)
 perceval = Twytbot.twytbot(settings.C_KEY, settings.C_SECRET, settings.ACCESS_TOK, settings.SECRET_TOK, settings.NAME)
 
 perceval.addpattern('dichotomie',"C'est pas faux !")
+perceval.addpattern('sinécure',"Ouais, C'est pas faux !")
+perceval.addpattern('insipide',"C'est pas faux !")
 while True:
     perceval.run()
     time.sleep(420)

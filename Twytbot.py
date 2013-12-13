@@ -35,7 +35,7 @@ class twytbot:
     def sendtweet(self, user, response, message_id):
         text = "@"+user+" "+response
         log.info("Sending '"+text+"'")
-        self.twitter.update_status(status=text, in_reply_to_status_id=message_id)
+        #self.twitter.update_status(status=text, in_reply_to_status_id=message_id)
 
     def saveid(self, max_id):
         log.info("Saving max_ids")
@@ -65,7 +65,7 @@ class twytbot:
                 self.last_id = 0
 
             log.info("Search : "+req+" since "+str(self.last_id))
-            result = self.twitter.search(q=req, since_id=self.last_id)
+            result = self.twitter.search(q=req, since_id=self.last_id, lang='fr')
             log.info("Found "+str(len(result['statuses']))+" tweets")
                 
             if result['search_metadata']['max_id'] > self.last_id:
