@@ -26,8 +26,8 @@ class twytbot:
         try:
             #self.twitter.verify_credentials()
             pass
-        except:
-            log.warning("Twitter login failed")
+        except Exception as e:
+            log.warning("Twitter login failed : %s" % e)
             raise
 
     def addpattern(self, search, response):
