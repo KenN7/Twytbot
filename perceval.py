@@ -5,6 +5,7 @@ import Twytbot
 import time
 import settings
 import logging
+from random import gauss
 
 logging.basicConfig(level=logging.INFO, filename='perceval.log', format='%(asctime)s:%(name)s:%(levelname)-8s %(message)s')
 console = logging.StreamHandler()
@@ -16,8 +17,8 @@ perceval = Twytbot.twytbot(settings.C_KEY, settings.C_SECRET, settings.ACCESS_TO
 
 perceval.addpattern('dichotomie',"C'est pas faux !")
 perceval.addpattern('sinécure',"Ouais, C'est pas faux !")
-perceval.addpattern('insipide',"C'est pas faux !")
+#perceval.addpattern('insipide',"C'est pas faux !")
 perceval.addpattern('idylle',"Hum... Ouais, C'est pas faux !")
 while True:
     perceval.run()
-    time.sleep(300)
+    time.sleep(300+gauss(10,30))

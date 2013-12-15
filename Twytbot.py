@@ -3,7 +3,7 @@
 import twython
 import time
 import json
-from random import choice
+from random import choice,gauss
 
 import logging
 log = logging.getLogger(__name__)
@@ -18,7 +18,7 @@ class twytbot:
         self.last_id = 0
         self.patterns = {}
         self.twitter = 0
-        self.randomness = ['\o/',';)',':)',':p','/o/','|o|',':D','!','.','..',':/']
+        self.randomness = ['\o/',';)',':)',':p','/o/','|o|',':D','!','.','..',':/',':o','=)',':>']
         self.id_dict = {}
 
     def authentificate(self):
@@ -86,7 +86,7 @@ class twytbot:
                     self.sendtweet(tweet['user']['screen_name'], self.patterns[req], tweet['id_str'])
                 except Exception as e:
                     log.warning(e)
-                time.sleep(5)
+                time.sleep(30+gauss(0,5))
         
         self.saveid(self.id_dict)
         log.info("Bot stopped on %s" % time.ctime())
