@@ -17,6 +17,7 @@ perceval = Twytbot.twytbot(settings.C_KEY, settings.C_SECRET, settings.ACCESS_TO
 perceval.addpattern('dichotomie',"C'est pas faux !")
 perceval.addpattern('sinécure',"Ouais, C'est pas faux !")
 perceval.addpattern('insipide',"C'est pas faux !")
+perceval.addpattern('idylle',"Hum... Ouais, C'est pas faux !")
 while True:
     perceval.run()
     time.sleep(300)
