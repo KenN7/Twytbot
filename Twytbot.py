@@ -79,7 +79,7 @@ class twytbot:
                 self.id_dict[req] = result['search_metadata']['max_id'] 
                
             for tweet in result['statuses']:
-                if tweet['user']['screen_name'] == self.MYNAME:
+                if tweet['user']['screen_name'] == self.MYNAME or req in tweet['user']['screen_name']:
                     continue
                 log.info("%s said : %s" % (tweet['user']['screen_name'],tweet['text']))
                 try:
