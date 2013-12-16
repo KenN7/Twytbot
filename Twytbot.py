@@ -4,6 +4,7 @@ import twython
 import time
 import json
 from random import choice,gauss
+import re
 
 import logging
 log = logging.getLogger(__name__)
@@ -79,8 +80,27 @@ class twytbot:
                 self.id_dict[req] = result['search_metadata']['max_id'] 
                
             for tweet in result['statuses']:
-                if tweet['user']['screen_name'] == self.MYNAME or req in tweet['user']['screen_name']:
+                if tweet['in_reply_to_screen_name'] is not None:
+                    log.warning("Incorrect tweet : reply tweet to %s" % tweet['in_reply_to_screen_name'])
                     continue
+                if tweet['retweeted'] is True:
+                    log.warning("Incorrect tweet : retweeted")
+                    continue
+                if 'RT' in tweet['text']:
+                    log.warning("Incorrect tweet : retweeted")
+                    continue
+                if tweet['user']['screen_name'] == self.MYNAME:
+                    log.warning("Incorrect tweet : my own !")
+                    continue
+                if req in tweet['user']['screen_name'].lower():
+                    log.warning("Detected incorrect tweet : %s" % tweet['text'])
+                    continue
+               
+                reg = re.findall('@(?P<name>\S+)',tweet['text'])
+                if any(req in ex.lower() for ex in reg:
+                    log.warning("Incorrect tweet : pattern in name %s" % reg)
+                    continue
+
                 log.info("%s said : %s" % (tweet['user']['screen_name'],tweet['text']))
                 try:
                     self.sendtweet(tweet['user']['screen_name'], self.patterns[req], tweet['id_str'])
