@@ -97,7 +97,7 @@ class twytbot:
                     continue
                
                 reg = re.findall('@(?P<name>\S+)',tweet['text'])
-                if any(req in ex.lower() for ex in reg:
+                if any(req in ex.lower() for ex in reg):
                     log.warning("Incorrect tweet : pattern in name %s" % reg)
                     continue
 
