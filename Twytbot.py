@@ -68,12 +68,20 @@ class twytbot:
             except Exception as e:
                 log.warning(e)
                 log.info("New word : '%s' detected, initializing id (anti-spam)" % req)
-                antispam = self.twitter.search(q=req, since_id=0, lang='fr')
+                try:
+                    antispam = self.twitter.search(q=req, since_id=0, lang='fr')
+                except Exception as e:
+                    log.warning(e)
+                    continue
                 self.last_id = antispam['search_metadata']['max_id']
                 log.info("Ignoring %i tweets and using %i for last_id" % (len(antispam['statuses']),self.last_id))
 
             log.info("Search : %s since %i" % (req,self.last_id))
-            result = self.twitter.search(q=req, since_id=self.last_id, lang='fr')
+            try:
+                result = self.twitter.search(q=req, since_id=self.last_id, lang='fr')
+            except Exception as e:
+                log.warning(e)
+                continue
             log.info("Found %i tweets" % len(result['statuses']))
                 
             if result['search_metadata']['max_id'] > self.last_id:
