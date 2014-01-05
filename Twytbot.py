@@ -28,7 +28,7 @@ class twytbot:
             #self.twitter.verify_credentials()
             pass
         except Exception as e:
-            log.warning("Twitter login failed : %s" % e.message())
+            log.warning("Twitter login failed : %s" % e.message)
             raise
 
     def addpattern(self, search, response):
@@ -59,19 +59,19 @@ class twytbot:
         try:
             self.id_dict = self.getid()
         except Exception as e:
-            log.warning(e.message())
+            log.warning(e.message)
             log.debug("Dict file not found, will be created")
 
         for req in self.patterns:
             try:
                 self.last_id = self.id_dict[req]
             except Exception as e:
-                log.warning(e.message())
+                log.warning(e.message)
                 log.info("New word : '%s' detected, initializing id (anti-spam)" % req)
                 try:
                     antispam = self.twitter.search(q=req, since_id=0, lang='fr')
                 except Exception as e:
-                    log.warning(e.message())
+                    log.warning(e.message)
                     continue
                 self.last_id = antispam['search_metadata']['max_id']
                 log.info("Ignoring %i tweets and using %i for last_id" % (len(antispam['statuses']),self.last_id))
@@ -80,7 +80,7 @@ class twytbot:
             try:
                 result = self.twitter.search(q=req, since_id=self.last_id, lang='fr')
             except Exception as e:
-                log.warning(e.message())
+                log.warning(e.message)
                 continue
             log.info("Found %i tweets" % len(result['statuses']))
                 
@@ -113,7 +113,7 @@ class twytbot:
                 try:
                     self.sendtweet(tweet['user']['screen_name'], self.patterns[req], tweet['id_str'])
                 except Exception as e:
-                    log.warning(e.message())
+                    log.warning(e.message)
                 time.sleep(30+gauss(0,5))
         
         self.saveid(self.id_dict)
